@@ -1,0 +1,74 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Entity;
+
+use App\Repository\PasswordResetTokenRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: PasswordResetTokenRepository::class)]
+#[ORM\Table(name: 'password_reset_token')]
+class PasswordResetToken
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
+    private User $user;
+
+    /** SHA-256 хэш сырого токена — в email уходит сырой, в БД хранится хэш */
+    #[ORM\Column(length: 64, unique: true)]
+    private string $token;
+
+    #[ORM\Column]
+    private \DateTimeImmutable $expiresAt;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $usedAt = null;
+
+    public function __construct(User $user, string $tokenHash, \DateTimeImmutable $expiresAt)
+    {
+        $this->user      = $user;
+        $this->token     = $tokenHash;
+        $this->expiresAt = $expiresAt;
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
+    }
+
+    public function getToken(): string
+    {
+        return $this->token;
+    }
+
+    public function getExpiresAt(): \DateTimeImmutable
+    {
+        return $this->expiresAt;
+    }
+
+    public function isExpired(): bool
+    {
+        return $this->expiresAt < new \DateTimeImmutable();
+    }
+
+    public function isUsed(): bool
+    {
+        return $this->usedAt !== null;
+    }
+
+    public function markUsed(): void
+    {
+        $this->usedAt = new \DateTimeImmutable();
+    }
+}

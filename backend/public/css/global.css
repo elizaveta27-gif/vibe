@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap');
+
+/* ── Переменные ─────────────────────────────────────────────────────────── */
+:root {
+    --dark:    #2d2926;
+    --brown:   #4a3f35;
+    --gold:    #c9a96e;
+    --cream:   #f5ede3;
+    --bg:      #faf9f7;
+    --border:  #e5ddd5;
+    --muted:   #9e9289;
+    --error:   #e07070;
+    --success: #27ae60;
+
+    --radius-sm: 8px;
+    --radius:    12px;
+    --radius-lg: 20px;
+
+    --serif: 'Cormorant Garamond', serif;
+    --sans:  'Inter', sans-serif;
+
+    --shadow-sm: 0 1px 4px rgba(0,0,0,.08);
+    --shadow:    0 4px 20px rgba(0,0,0,.10);
+    --shadow-lg: 0 12px 40px rgba(0,0,0,.15);
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--dark);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* ── Общие компоненты ───────────────────────────────────────────────────── */
+
+/* Кнопки */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--radius);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity .2s, transform .1s;
+    letter-spacing: .3px;
+    white-space: nowrap;
+}
+.btn:hover    { opacity: .88; }
+.btn:active   { transform: scale(.98); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--dark), var(--brown));
+    color: var(--cream);
+}
+.btn-outline {
+    background: transparent;
+    color: var(--dark);
+    border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--gold); opacity: 1; }
+
+.btn-gold {
+    background: linear-gradient(135deg, #c9a96e, #b8924f);
+    color: #fff;
+}
+
+.btn-sm { padding: 8px 16px; font-size: 13px; }
+.btn-lg { padding: 16px 32px; font-size: 16px; }
+.btn-full { width: 100%; }
+
+/* Хедер */
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,249,247,.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo {
+    font-family: var(--serif);
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--dark);
+    letter-spacing: 2px;
+}
+.header-logo span { color: var(--gold); }
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Алерты */
+.alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    display: none;
+}
+.alert.visible { display: block; }
+.alert-error   { background: #fdf2f2; color: #c0392b; border: 1px solid #f5c6c6; }
+.alert-success { background: #f2fdf6; color: var(--success); border: 1px solid #b7e4c7; }
+
+/* Поля */
+.field { margin-bottom: 18px; }
+.field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #6b5e54;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+.field input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--dark);
+    background: #fff;
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+}
+.field input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,169,110,.12);
+}
+.field input.is-error {
+    border-color: var(--error);
+    box-shadow: 0 0 0 3px rgba(224,112,112,.1);
+}
+.field-error {
+    font-size: 12px;
+    color: var(--error);
+    margin-top: 4px;
+    display: none;
+}
+.field-error.visible { display: block; }
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .site-header { padding: 0 20px; }
+}

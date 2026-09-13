@@ -1,0 +1,148 @@
+/* editor.css */
+.editor-outline {
+    outline: 2px dashed #b38b6d !important;
+    outline-offset: 2px !important;
+    cursor: pointer !important;
+    transition: outline 0.2s ease;
+    position: relative;
+    background-color: rgba(179, 139, 109, 0.05);
+}
+
+.editor-outline:hover {
+    outline: 2px solid #b38b6d !important;
+    background-color: rgba(179, 139, 109, 0.1);
+}
+
+.editor-input-container {
+    display: inline-block;
+    position: relative;
+    min-width: 100px;
+}
+
+.editor-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #b38b6d;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: inherit;
+    color: black;
+    background: white;
+    box-sizing: border-box;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.editor-input:focus {
+    outline: none;
+    border-color: #9a7357;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.15);
+}
+
+/* Индикатор редактирования */
+.editing {
+    position: relative;
+}
+
+.editing::after {
+    content: '✎';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #b38b6d;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+
+/* Для разных типов блоков можно добавить свои стили */
+.js-edit-title {
+    font-weight: bold;
+}
+
+.js-edit-date {
+    font-style: italic;
+}
+
+.js-edit-venue {
+    text-decoration: underline dotted;
+}
+
+/* ===== СТИЛИ ДЛЯ ЗАГРУЗЧИКА ИЗОБРАЖЕНИЙ ===== */
+
+/* Индикатор, что блок с изображением редактируемый */
+
+/* ===== УПРАВЛЕНИЕ ТАЙМЛАЙНОМ ===== */
+
+.timeline-item {
+    position: relative;
+}
+
+.timeline-delete-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 50%;
+    background: #e57373;
+    color: white;
+    font-size: 16px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    z-index: 10;
+}
+
+.timeline-item:hover .timeline-delete-btn {
+    opacity: 1;
+}
+
+.timeline-delete-btn:hover {
+    background: #c62828;
+}
+
+.timeline-add-btn {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 24px;
+    border: 2px dashed #b38b6d;
+    border-radius: 4px;
+    background: transparent;
+    color: #b38b6d;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.timeline-add-btn:hover {
+    background: rgba(179, 139, 109, 0.08);
+    border-color: #9a7357;
+    color: #9a7357;
+}
+
+/* Темная тема (если будет) */
+@media (prefers-color-scheme: dark) {
+    .js-edit-image:hover::after {
+        background: rgba(255, 255, 255, 0.9);
+        color: #333;
+    }
+}

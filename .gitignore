@@ -1,0 +1,4 @@
+/reference
+/plans
+.env.prod
+docker/ssl/

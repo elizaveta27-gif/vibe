@@ -1,0 +1,53 @@
+framework:
+    rate_limiter:
+        # POST /api/auth/login — 5 попыток за 15 минут с одного IP
+        login:
+            policy: sliding_window
+            limit: 5
+            interval: '15 minutes'
+
+        # POST /api/auth/register — 3 регистрации в день с одного IP
+        register:
+            policy: sliding_window
+            limit: 3
+            interval: '1 day'
+
+        # POST /api/invitations — 20 приглашений в час
+        create_invitation:
+            policy: sliding_window
+            limit: 20
+            interval: '1 hour'
+
+        # POST /api/invitations/upload-image — 30 изображений в час
+        upload_image:
+            policy: sliding_window
+            limit: 30
+            interval: '1 hour'
+
+        # POST /api/support — 10 обращений в час с одного IP
+        support_request:
+            policy: sliding_window
+            limit: 10
+            interval: '1 hour'
+
+        # POST /api/auth/forgot-password — 5 запросов в час с одного IP
+        forgot_password:
+            policy: sliding_window
+            limit: 5
+            interval: '1 hour'
+
+        # POST /api/public/waitlist — 5 заявок в час с одного IP
+        waitlist:
+            policy: sliding_window
+            limit: 5
+            interval: '1 hour'
+        #POST /api/public/analytics/event
+        analytics_event:
+            policy: sliding_window
+            limit: 50
+            interval: '1 hour'
+        # POST /api/public/rsvp/{shortCode}
+        rsvp_answer:
+            policy: sliding_window
+            limit: 10
+            interval: '1 hour'
